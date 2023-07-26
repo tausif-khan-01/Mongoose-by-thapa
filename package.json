@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.1"
+  },
+  "name": "mongoose-by-thapa",
+  "type": "module",
+  "description": "learning Mongoos",
+  "version": "1.0.0",
+  "main": "src/database.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tausif-khan-01/Mongoose-by-thapa.git"
+  },
+  "author": "Tausif Khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tausif-khan-01/Mongoose-by-thapa/issues"
+  },
+  "homepage": "https://github.com/tausif-khan-01/Mongoose-by-thapa#readme"
+}
