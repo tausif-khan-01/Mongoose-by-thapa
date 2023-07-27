@@ -50,7 +50,6 @@ const Playlist = new mongoose.model("Playlist", playlistSchema); //* Playlist is
 // //? Save the Created document to dataBase
 // reactPlaylist.save();
 
-
 //* error Handling While Creating/inserting a document
 const creatNewDocument = async () => {
   try {
@@ -70,4 +69,71 @@ const creatNewDocument = async () => {
     console.log(err);
   }
 };
-creatNewDocument();
+// creatNewDocument();
+
+//? Inserting multiple documents at a time in mongoose with error handling
+const creatMultipleDocument = async () => {
+  try {
+    //? Inserting multiple documents at a time in mongoose
+    const angularPlaylist = new Playlist({
+      name: "AngularJS",
+      courseType: "FrontEnd",
+      videos: 100,
+      author: "Tausif Khan",
+      active: true,
+    });
+    const vuePlaylist = new Playlist({
+      name: "VueJS",
+      courseType: "FrontEnd",
+      videos: 100,
+      author: "Tausif Khan",
+      active: true,
+    });
+    const nextPlaylist = new Playlist({
+      name: "NextJS",
+      courseType: "Fullsatck",
+      videos: 50,
+      author: "Tausif Khan",
+      active: true,
+    });
+    const reduxPlaylist = new Playlist({
+      name: "redux",
+      courseType: "FrontEnd",
+      videos: 30,
+      author: "Tausif Khan",
+      active: true,
+    });
+    const javascriptPlaylist = new Playlist({
+      name: "JavaScript",
+      courseType: "FrontEnd",
+      videos: 130,
+      author: "Tausif Khan",
+      active: true,
+    });
+    const typescriptPlaylist = new Playlist({
+      name: "TypeScript",
+      courseType: "FrontEnd",
+      videos: 30,
+      author: "Tausif Khan",
+      active: true,
+    });
+
+    //* insert using insertMany method
+    const manyResult = await Playlist.insertMany([
+      angularPlaylist,
+      vuePlaylist,
+      nextPlaylist,
+      reduxPlaylist,
+      javascriptPlaylist,
+      typescriptPlaylist,
+    ]);
+    console.log(manyResult);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// creatMultipleDocument();
+
+
