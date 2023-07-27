@@ -5,13 +5,13 @@ import mongoose from "mongoose";
 
 const app = express();
 
-//! establishing Connection betaween MongoDB and Nodejs
+//? establishing Connection betaween MongoDB and Nodejs
 mongoose
   .connect("mongodb://127.0.0.1:27017/thapaTech")
   .then(() => console.log("connection successful..."))
   .catch((error) => console.log(error));
 
-//! defining Schema
+//? defining Schema
 const playlistSchema = new mongoose.Schema({
   name: String,
   courseType: String,
@@ -24,7 +24,7 @@ const playlistSchema = new mongoose.Schema({
   },
 });
 
-//! schema type supported
+//? schema type supported
 // Array
 // Boolean
 // Buffer
@@ -34,10 +34,10 @@ const playlistSchema = new mongoose.Schema({
 // ObjectId
 // String
 
-//! Creating Mondel : Means crewating collection
+//? Creating Mondel : Means crewating collection
 const Playlist = new mongoose.model("Playlist", playlistSchema); //* Playlist is name of colection and it should always singular noun anfd it will coverted to pular later
 
-// //! Creating or Inserting documents
+// //? Creating or Inserting documents
 // const reactPlaylist = new Playlist({
 //   name: "React JS ",
 //   courseType: "FrontEnd",
@@ -47,14 +47,14 @@ const Playlist = new mongoose.model("Playlist", playlistSchema); //* Playlist is
 // //   date : it will be added auto maticall beause Use default date in schema
 // });
 
-// //! Save the Created document to dataBase
+// //? Save the Created document to dataBase
 // reactPlaylist.save();
 
 
 //* error Handling While Creating/inserting a document
 const creatNewDocument = async () => {
   try {
-    // //! Creating or Inserting a new documents
+    // //? Creating or Inserting a new documents
     const reactPlaylist = new Playlist({
       name: 80,
       courseType: "BackEnd",
@@ -63,7 +63,7 @@ const creatNewDocument = async () => {
       active: true,
       //   date : it will be added auto maticall beause Use default date in schema
     });
-    // //! Save the Created document to dataBase
+    // //? Save the Created document to dataBase
     const result = await reactPlaylist.save();
     console.log(result);
   } catch (err) {
