@@ -73,7 +73,7 @@ const creatNewDocument = async () => {
 //* creatNewDocument();
 
 //? Inserting multiple documents at a time in mongoose with error handling
-const creatMultipleDocument = async () => {
+const creatMultipleDocuments = async () => {
   try {
     //? Inserting multiple documents at a time in mongoose
     const angularPlaylist = new Playlist({
@@ -87,21 +87,21 @@ const creatMultipleDocument = async () => {
       name: "VueJS",
       courseType: "FrontEnd",
       videos: 100,
-      author: "Tausif Khan",
+      author: "Code With Harry",
       active: true,
     });
     const nextPlaylist = new Playlist({
       name: "NextJS",
       courseType: "Fullsatck",
       videos: 50,
-      author: "Tausif Khan",
+      author: "Thapa Technical",
       active: true,
     });
     const reduxPlaylist = new Playlist({
       name: "redux",
       courseType: "FrontEnd",
       videos: 30,
-      author: "Tausif Khan",
+      author: "Code With Harry",
       active: true,
     });
     const javascriptPlaylist = new Playlist({
@@ -115,7 +115,7 @@ const creatMultipleDocument = async () => {
       name: "TypeScript",
       courseType: "FrontEnd",
       videos: 30,
-      author: "Tausif Khan",
+      author: "Thapa Technical",
       active: true,
     });
     const nodejsPlaylist = new Playlist({
@@ -136,14 +136,14 @@ const creatMultipleDocument = async () => {
       name: "PHP",
       courseType: "BackEnd",
       videos: 60,
-      author: "Tausif Khan",
+      author: "Thapa Technical",
       active: true,
     });
     const javaPlaylist = new Playlist({
       name: "Java",
       courseType: "BackEnd",
       videos: 80,
-      author: "Tausif Khan",
+      author: "Code With Harry",
       active: true,
     });
     const larvelPlaylist = new Playlist({
@@ -157,14 +157,14 @@ const creatMultipleDocument = async () => {
       name: "MongoDB",
       courseType: "DataBase",
       videos: 40,
-      author: "Tausif Khan",
+      author: "Thapa Technical",
       active: true,
     });
     const sqlPlaylist = new Playlist({
       name: "sql",
       courseType: "DataBase",
       videos: 75,
-      author: "Tausif Khan",
+      author: "Code With Harry",
       active: true,
     });
 
@@ -190,7 +190,7 @@ const creatMultipleDocument = async () => {
   }
 };
 
-//*  creatMultipleDocument();
+//*  creatMultipleDocuments();
 
 //! <==================#READ OPERATIONS #==========================================================================>
 
@@ -269,6 +269,45 @@ const readCollectionWithFilterNotIn = async () => {
   console.log(readedData);
 };
 //* readCollectionWithFilterNotIn();
+
+//! <--------------------------------- LOGICAL QUERY OPERATOS IN MONGOdb------------------------->
+//? 1. $and : Logical AND
+const readCollectionWithFilterAnd = async () => {
+  const readedData = await Playlist.find({
+    $and: [{ courseType: "FrontEnd" }, { author: "Tausif Khan" }],
+  });
+  console.log(readedData);
+};
+//*  readCollectionWithFilterAnd()
+
+//? 2. $or : Logical OR
+const readCollectionWithFilterOr = async () => {
+  const readedData = await Playlist.find({
+    $or: [{ courseType: "FrontEnd" }, { author: "Tausif Khan" }],
+  });
+  console.log(readedData);
+};
+//* readCollectionWithFilterOr();
+
+//? 3. $not : Logical NOT
+const readCollectionWithFilterNot = async () => {
+  const readedData = await Playlist.find({
+    videos: {$not:{$gt:100} } 
+  });
+  console.log(readedData);
+};
+//* readCollectionWithFilterNot();
+
+
+//? 4. $nor : Logical NOR
+const readCollectionWithFilterNor = async () => {
+  const readedData = await Playlist.find({
+    $nor: [{ courseType: "FrontEnd" }, { author: "Tausif Khan" }],
+  });
+  console.log(readedData);
+};
+//* readCollectionWithFilterNor();
+
 
 //! <==================#UPDATE OPERATIONS #==========================================================================>
 //! <==================#DELETE OPERATIONS #==========================================================================>
