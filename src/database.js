@@ -270,7 +270,7 @@ const readCollectionWithFilterNotIn = async () => {
 };
 //* readCollectionWithFilterNotIn();
 
-//! <--------------------------------- LOGICAL QUERY OPERATOS IN MONGOdb------------------------->
+//! <--------------------------------- LOGICAL QUERY OPERATOS IN MONGOdb------------------------------------------>
 //? 1. $and : Logical AND
 const readCollectionWithFilterAnd = async () => {
   const readedData = await Playlist.find({
@@ -292,12 +292,11 @@ const readCollectionWithFilterOr = async () => {
 //? 3. $not : Logical NOT
 const readCollectionWithFilterNot = async () => {
   const readedData = await Playlist.find({
-    videos: {$not:{$gt:100} } 
+    videos: { $not: { $gt: 100 } },
   });
   console.log(readedData);
 };
 //* readCollectionWithFilterNot();
-
 
 //? 4. $nor : Logical NOR
 const readCollectionWithFilterNor = async () => {
@@ -308,6 +307,16 @@ const readCollectionWithFilterNor = async () => {
 };
 //* readCollectionWithFilterNor();
 
+//! <--------------------------------- COUNT RESULTS IN MONGOdb------------------------------------------>
 
+const countResults = async () => {
+  const readedDataWithCount = await Playlist.find({ author: "Tausif Khan" }).count(); // count is deprecated but still working
+  console.log(`readedDataWithCountMethod = ${readedDataWithCount}`);
+  const readedDataWithCountDocuments = await Playlist.find({ author: "Tausif Khan" }).countDocuments();
+  console.log(`readedDataWithCountDocuments = ${readedDataWithCountDocuments}`);
+};
+
+countResults();
+//! <--------------------------------- SORTING IN MONGOdb------------------------------------------>
 //! <==================#UPDATE OPERATIONS #==========================================================================>
 //! <==================#DELETE OPERATIONS #==========================================================================>
