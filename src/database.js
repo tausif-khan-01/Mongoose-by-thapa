@@ -307,7 +307,7 @@ const readCollectionWithFilterNor = async () => {
 };
 //* readCollectionWithFilterNor();
 
-//! <--------------------------------- COUNT RESULTS IN MONGOdb------------------------------------------>
+//! <--------------------------------- COUNTING RESULTS IN MONGOdb------------------------------------------>
 
 const countResults = async () => {
   const readedDataWithCount = await Playlist.find({ author: "Tausif Khan" }).count(); // count is deprecated but still working
@@ -316,7 +316,27 @@ const countResults = async () => {
   console.log(`readedDataWithCountDocuments = ${readedDataWithCountDocuments}`);
 };
 
-countResults();
+//* countResults();
 //! <--------------------------------- SORTING IN MONGOdb------------------------------------------>
+const sortResultsInAlphabetical = async () => {
+  const readedDataWithSortAscending = await Playlist.find({ author: "Tausif Khan" }).sort({name:1});
+  console.log("Results in ascending order_____________________________________________________________________");
+  console.log(readedDataWithSortAscending);
+  const readedDataWithSortDescending = await Playlist.find({ author: "Tausif Khan" }).sort({name:-1});
+  console.log("Results in descending order_____________________________________________________________________");
+  console.log(readedDataWithSortDescending);
+};
+//* sortResultsInAlphabetical();
+
+const sortResultsInNumerals = async () => {
+  const readedDataWithSortAscending = await Playlist.find().sort({videos:1});
+  console.log("Results in ascending order_____________________________________________________________________");
+  console.log(readedDataWithSortAscending);
+  const readedDataWithSortDescending = await Playlist.find().sort({videos:-1});
+  console.log("Results in descending order_____________________________________________________________________");
+  console.log(readedDataWithSortDescending);
+};
+//* sortResultsInNumerals();
+
 //! <==================#UPDATE OPERATIONS #==========================================================================>
 //! <==================#DELETE OPERATIONS #==========================================================================>
