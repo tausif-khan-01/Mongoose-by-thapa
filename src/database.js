@@ -322,6 +322,7 @@ const countResults = async () => {
 
 //* countResults();
 //! <--------------------------------- SORTING IN MONGOdb------------------------------------------>
+//? 1. sortResultsInAlphabeticalOrder
 const sortResultsInAlphabetical = async () => {
   const readedDataWithSortAscending = await Playlist.find({
     author: "Tausif Khan",
@@ -340,6 +341,7 @@ const sortResultsInAlphabetical = async () => {
 };
 //* sortResultsInAlphabetical();
 
+//? 2. sortResultsInNumerals
 const sortResultsInNumerals = async () => {
   const readedDataWithSortAscending = await Playlist.find().sort({ videos: 1 });
   console.log(
@@ -358,6 +360,7 @@ const sortResultsInNumerals = async () => {
 
 //! <==================#UPDATE OPERATIONS #==========================================================================>
 
+//? 1. Udate Data Using Update And Then Read Result
 const udateDataUsingUpdateAndThenReadResult = async (_id) => {
   const udatedData = await Playlist.updateOne(
     { _id },
@@ -371,8 +374,9 @@ const udateDataUsingUpdateAndThenReadResult = async (_id) => {
   const readUpdatedData = await Playlist.findOne({ _id }); //read
   console.log(readUpdatedData);
 };
-// udateDataUsingUpdateAndThenReadResult("64c210ab89d5e38d337b5590");
+//* udateDataUsingUpdateAndThenReadResult("64c210ab89d5e38d337b5590");
 
+//? 2. Update Data Using Find By Id And Update Method
 const updateDataUsingFindByIdAndUpdateMethod = async (_id) => {
   const updatedDataUsingFindByIdAndUpdateMethod =
     await Playlist.findByIdAndUpdate(
@@ -388,6 +392,39 @@ const updateDataUsingFindByIdAndUpdateMethod = async (_id) => {
     );
   console.log(updatedDataUsingFindByIdAndUpdateMethod);
 };
+//* updateDataUsingFindByIdAndUpdateMethod("64c210ab89d5e38d337b5590");
 
-// updateDataUsingFindByIdAndUpdateMethod("64c210ab89d5e38d337b5590");
-//! <==================#DELETE OPERATIONS #==========================================================================>
+//? 3. delete a field from documents
+const deleteField = async () => {
+  const deletedData = await Playlist.updateMany(
+    { videos: { $lt: 40 } },
+    { $unset: { active: 1 } }
+  );
+  console.log(deletedData);
+};
+//* deleteField()
+
+//! <========================================#DELETE OPERATIONS#==========================================================================>
+
+//? 1. delete a document from database
+const deleteDocument = async () => {
+  const deletedData = await Playlist.deleteOne({ name: "redux" });
+  console.log(deletedData);
+};
+//*  deleteDocument()
+
+//? 2. delete a document from database
+const deleteManyDocuments = async () => {
+  const deletedData = await Playlist.deleteMany({
+    videos: { $lt: 40 },
+  });
+  console.log(deletedData);
+};
+//* deleteManyDocuments();
+
+//? 3. delete a document And show what is deleted
+const deleteDocumentAndFind = async (_id) => {
+  const deletedData = await Playlist.findByIdAndDelete({ _id });
+  console.log(deletedData);
+};
+deleteDocumentAndFind("64c210ab89d5e38d337b558f");
