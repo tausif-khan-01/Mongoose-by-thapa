@@ -310,33 +310,84 @@ const readCollectionWithFilterNor = async () => {
 //! <--------------------------------- COUNTING RESULTS IN MONGOdb------------------------------------------>
 
 const countResults = async () => {
-  const readedDataWithCount = await Playlist.find({ author: "Tausif Khan" }).count(); // count is deprecated but still working
+  const readedDataWithCount = await Playlist.find({
+    author: "Tausif Khan",
+  }).count(); // count is deprecated but still working
   console.log(`readedDataWithCountMethod = ${readedDataWithCount}`);
-  const readedDataWithCountDocuments = await Playlist.find({ author: "Tausif Khan" }).countDocuments();
+  const readedDataWithCountDocuments = await Playlist.find({
+    author: "Tausif Khan",
+  }).countDocuments();
   console.log(`readedDataWithCountDocuments = ${readedDataWithCountDocuments}`);
 };
 
 //* countResults();
 //! <--------------------------------- SORTING IN MONGOdb------------------------------------------>
 const sortResultsInAlphabetical = async () => {
-  const readedDataWithSortAscending = await Playlist.find({ author: "Tausif Khan" }).sort({name:1});
-  console.log("Results in ascending order_____________________________________________________________________");
+  const readedDataWithSortAscending = await Playlist.find({
+    author: "Tausif Khan",
+  }).sort({ name: 1 });
+  console.log(
+    "Results in ascending order_____________________________________________________________________"
+  );
   console.log(readedDataWithSortAscending);
-  const readedDataWithSortDescending = await Playlist.find({ author: "Tausif Khan" }).sort({name:-1});
-  console.log("Results in descending order_____________________________________________________________________");
+  const readedDataWithSortDescending = await Playlist.find({
+    author: "Tausif Khan",
+  }).sort({ name: -1 });
+  console.log(
+    "Results in descending order_____________________________________________________________________"
+  );
   console.log(readedDataWithSortDescending);
 };
 //* sortResultsInAlphabetical();
 
 const sortResultsInNumerals = async () => {
-  const readedDataWithSortAscending = await Playlist.find().sort({videos:1});
-  console.log("Results in ascending order_____________________________________________________________________");
+  const readedDataWithSortAscending = await Playlist.find().sort({ videos: 1 });
+  console.log(
+    "Results in ascending order_____________________________________________________________________"
+  );
   console.log(readedDataWithSortAscending);
-  const readedDataWithSortDescending = await Playlist.find().sort({videos:-1});
-  console.log("Results in descending order_____________________________________________________________________");
+  const readedDataWithSortDescending = await Playlist.find().sort({
+    videos: -1,
+  });
+  console.log(
+    "Results in descending order_____________________________________________________________________"
+  );
   console.log(readedDataWithSortDescending);
 };
 //* sortResultsInNumerals();
 
 //! <==================#UPDATE OPERATIONS #==========================================================================>
+
+const udateDataUsingUpdateAndThenReadResult = async (_id) => {
+  const udatedData = await Playlist.updateOne(
+    { _id },
+    {
+      //update
+      $set: {
+        name: "Something Anony mous",
+      },
+    }
+  );
+  const readUpdatedData = await Playlist.findOne({ _id }); //read
+  console.log(readUpdatedData);
+};
+// udateDataUsingUpdateAndThenReadResult("64c210ab89d5e38d337b5590");
+
+const updateDataUsingFindByIdAndUpdateMethod = async (_id) => {
+  const updatedDataUsingFindByIdAndUpdateMethod =
+    await Playlist.findByIdAndUpdate(
+      { _id },
+      {
+        $set: {
+          name: "VueJS",
+        },
+      },
+      {
+        new: true,
+      }
+    );
+  console.log(updatedDataUsingFindByIdAndUpdateMethod);
+};
+
+// updateDataUsingFindByIdAndUpdateMethod("64c210ab89d5e38d337b5590");
 //! <==================#DELETE OPERATIONS #==========================================================================>
