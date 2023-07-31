@@ -427,4 +427,4 @@ const deleteDocumentAndFind = async (_id) => {
   const deletedData = await Playlist.findByIdAndDelete({ _id });
   console.log(deletedData);
 };
-deleteDocumentAndFind("64c210ab89d5e38d337b558f");
+//* deleteDocumentAndFind("64c210ab89d5e38d337b558f");
