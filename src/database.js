@@ -2,6 +2,8 @@
 import express from "express";
 import { MongoExpiredSessionError, ObjectId } from "mongodb";
 import mongoose from "mongoose";
+import validator from "validator";
+
 
 const app = express();
 
@@ -12,15 +14,61 @@ mongoose
   .catch((error) => console.log(error));
 
 //? defining Schema
+//? Schema mongoose built in Validations
+
 const playlistSchema = new mongoose.Schema({
-  name: String,
-  courseType: String,
-  videos: Number,
-  author: String,
+  name: {
+    type: String,
+    required: true,
+    minLength: 3,
+    maxLength: 15,
+    uppercase: true,
+    trim: true,
+  },
+  courseType: {
+    type: String,
+    required: true,
+    uppercase: true,
+    enum: ["FRONTEND", "BACKEND", "DATABASE"],
+  },
+
+  videos: {
+    type: Number,
+    required: true,
+    //? Custom validation
+    // 1
+    validate(value) {
+      if (value < 0) {
+        throw new Error("videos could not be negative");
+      }
+    },
+    
+    // 2
+    // validate: {
+    //   validator: function (v) {
+    //     return v < 400;
+    //   },
+    //   message: "videos could not be greater than 400",
+    // },
+  },
+  author: {
+    type: String,
+    required: true,
+    uppercase: true,
+    enum: ["TAUSIF", "THAPA", "HARRY"],
+  },
   active: Boolean,
   date: {
     type: Date,
     default: Date.now,
+  },
+  email: {
+    type: String,
+    validate(v){
+      if (!validator.isEmail(v)) {
+        throw new Error ("Invalid Email")
+      }
+    }
   },
 });
 
@@ -35,7 +83,7 @@ const playlistSchema = new mongoose.Schema({
 // String
 
 //! <==================#CREATE OPERATIONS #==========================================================================>
-//? Creating Mondel : Means crewating collection
+//? Creating Mondel : Means creating collection
 const Playlist = new mongoose.model("Playlist", playlistSchema); //* Playlist is name of colection and it should always singular noun anfd it will coverted to pular later
 
 // //? Creating or Inserting documents
@@ -56,11 +104,12 @@ const creatNewDocument = async () => {
   try {
     // //? Creating or Inserting a new documents
     const reactPlaylist = new Playlist({
-      name: 80,
+      name: "MyFramework",
       courseType: "BackEnd",
       videos: 75,
-      author: "Tausif Khan",
+      author: "Tausif",
       active: true,
+      email : "khansdfs@gmail.com"
       //   date : it will be added auto maticall beause Use default date in schema
     });
     // //? Save the Created document to dataBase
@@ -70,7 +119,7 @@ const creatNewDocument = async () => {
     console.log(err);
   }
 };
-//* creatNewDocument();
+creatNewDocument();
 
 //? Inserting multiple documents at a time in mongoose with error handling
 const creatMultipleDocuments = async () => {
